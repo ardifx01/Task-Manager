@@ -27,7 +27,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="{{ url('admin/users') }}"
                            class="block py-2 px-4 rounded hover:bg-blue-600">
                             Manage User
                         </a>

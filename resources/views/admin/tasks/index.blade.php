@@ -10,7 +10,7 @@
     <table class="w-full bg-white shadow rounded">
         <thead>
             <tr>
-                <th class="p-2 border">User</th>
+                <th class="p-2 border">Username</th>
                 <th class="p-2 border">Judul</th>
                 <th class="p-2 border">Status</th>
                 <th class="p-2 border">Aksi</th>

@@ -5,7 +5,7 @@ use App\Http\Controllers\Authcontroller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\TaskController;
 use App\Http\Controllers\User\TaskViewController;
-
+use App\Http\Controllers\Admin\UserController;
 
 Route::get("/", [Authcontroller::class, 'index']);
 Route::get("/login", [Authcontroller::class, 'login']);
@@ -16,6 +16,8 @@ Route::post('login_post', [Authcontroller::class, 'login_post']);
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
+    Route::resource('admin/users', UserController::class, ['as' => 'admin']);
+
 });
 
 Route::group(['middleware' => 'user'], function () {
