@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authcontroller;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\TaskController;
+use App\Http\Controllers\User\TaskViewController;
+
 
 Route::get("/", [Authcontroller::class, 'index']);
 Route::get("/login", [Authcontroller::class, 'login']);
@@ -17,6 +20,13 @@ Route::group(['middleware' => 'admin'], function () {
 
 Route::group(['middleware' => 'user'], function () {
     Route::get('user/dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('user/tasks', [TaskViewController::class, 'index'])->name('user.tasks');
+    Route::post('user/tasks/{task}/update-status', [TaskViewController::class, 'updateStatus'])->name('user.tasks.updateStatus');
 });
 
 Route::get('/logout', [Authcontroller::class, 'logout'])->name('logout');
+
+Route::resource('admin/tasks', TaskController::class, ['as' => 'admin']);
+
+Route::get('user/tasks', [TaskViewController::class, 'index'])->name('user.tasks');
+

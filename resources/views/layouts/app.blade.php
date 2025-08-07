@@ -21,7 +21,7 @@
 
                 @if(Auth::user()->is_role === 'admin')
                     <li>
-                        <a href="#"
+                        <a href="{{ url('admin/tasks') }}"
                            class="block py-2 px-4 rounded hover:bg-blue-600">
                             Manage Task User
                         </a>
@@ -34,7 +34,7 @@
                     </li>
                 @else
                     <li>
-                        <a href="#"
+                        <a href="{{ url('user/tasks') }}"
                            class="block py-2 px-4 rounded hover:bg-blue-600">
                             Lihat Task
                         </a>
