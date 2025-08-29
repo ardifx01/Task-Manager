@@ -50,7 +50,7 @@ class Authcontroller extends Controller
                 return redirect('login')->with('error', 'No Availabels email or password, please check and try again.');
             }
         }else {
-            return redirect()->back()->with('error', 'Pleasere check your credentials and try again.');
+            return redirect()->back()->with('error', 'Please check your credentials and try again.');
         }
     }
 

@@ -4,49 +4,36 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Task;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class TaskViewController extends Controller
 {
+    // Menampilkan task milik user yang login
     public function index()
     {
-        // Ambil semua tugas milik user yang sedang login
-        $tasks = Task::where('user_id', Auth::id())->get();
+        // Hanya ambil task yang assigned ke user ini
+        $tasks = Task::where('assigned_to', Auth::id())->get();
 
         return view('user.tasks.index', compact('tasks'));
     }
 
-    public function create()
-    {
-        $users = User::where('is_role', 'user')->get();
-        return view('admin.tasks.create', compact('users'));
-    }
-
-    public function edit()
-    {
-        $users = User::where('is_role', 'user')->get();
-        return view('admin.tasks.edit', compact('task', 'users'));
-
-    }
-
+    // Update status task
     public function updateStatus(Request $request, Task $task)
     {
-        // Pastikan tugas milik user yang sedang login
-        if ($task->user_id !== Auth::id()) {
-            abort(403, 'Unauthorized action.');
+        // Pastikan hanya user yang ditugaskan bisa update
+        if ($task->assigned_to !== Auth::id()) {
+            return back()->with('error', 'Anda tidak berhak mengubah status tugas ini.');
         }
 
         $request->validate([
-            'status' => 'required|in:belum dikerjakan,proses,selesai'
+            'status' => 'required|in:pending,in_progress,completed'
         ]);
 
         $task->status = $request->status;
         $task->save();
 
-        return redirect()->back()->with('success', 'Status tugas berhasil diperbarui.');
+        return back()->with('success', 'Status tugas berhasil diperbarui.');
     }
+
 }
-
-

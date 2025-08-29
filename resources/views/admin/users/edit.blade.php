@@ -10,7 +10,7 @@
         @method('PUT')
 
         <div class="mb-4">
-            <label for="name" class="block font-medium">Nama</label>
+            <label for="name" class="block font-medium">Username</label>
             <input type="text" name="name" id="name" value="{{ $user->name }}" required class="w-full border rounded px-3 py-2">
         </div>
 

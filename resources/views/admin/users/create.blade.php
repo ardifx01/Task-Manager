@@ -8,7 +8,7 @@
     <form action="{{ route('admin.users.store') }}" method="POST" class="bg-white p-6 rounded shadow">
         @csrf
         <div class="mb-4">
-            <label for="name" class="block font-medium">Nama</label>
+            <label for="name" class="block font-medium">Username</label>
             <input type="text" name="name" id="name" required class="w-full border rounded px-3 py-2">
         </div>
 
